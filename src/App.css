@@ -1,0 +1,39 @@
+.custom-gradient {
+  transition: background-image 0.3s ease-in-out;
+}
+
+
+.half-circle {
+  background: linear-gradient(#fff, #fff) padding-box,
+  linear-gradient(94deg, rgba(255, 17, 52, 1) 0%, rgba(247, 210, 60, 1) 51%, rgba(46, 227, 158, 1) 100%) border-box;
+  width: 300px;
+  height: 150px;
+  border-radius: 150px 150px 0 0;
+  border: 25px solid transparent;
+  border-bottom: 0;
+  box-sizing: border-box;
+}
+
+.arrow{
+  transition: all 1s;
+}
+
+.test{
+  overflow-x: scroll;
+  white-space: nowrap;
+}
+
+.ant-table-thead tr th.ant-table-cell{
+  background-color: #1C48C2 !important;
+  color: white;
+  font-size: 16px;
+}
+
+.ant-table-cell{
+  text-align: center !important;
+  font-size: 16px;
+}
+
+.ant-space-item .ant-button.ant-button-primary{
+  color: black !important;
+}
