@@ -3,6 +3,7 @@ import Header from "./Header"
 import { Table } from "antd"
 import { getData } from "../Services/APICalls"
 import { useState } from "react"
+import { useStoreContext } from "../Context/storeContext"
 
 const columns = [
     {
@@ -39,11 +40,12 @@ const columns = [
 
 function OperationCommandsPage() {
     const [list, setList] = useState()
+    const {userData} =useStoreContext()
 
     useEffect(() => {
         let instituteID = localStorage.getItem("instituteID")
         const fetchData = async () => {
-            let temp = await getData(`/orders/institution/${instituteID}`, localStorage.getItem("userToken"))
+            let temp = await getData(`/orders/institution/${userData.currentInstitutions._id}`, localStorage.getItem("userToken"))
             let temp2 = temp.data.data.orders.map((item) => {
                 const date = new Date(item.startedAt)
                 if (item.finishedAt == null) {

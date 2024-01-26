@@ -36,6 +36,40 @@ export const getData = async (url, token) => {
     return result
 }
 
+export const updateData = async (url, data, token) => {
+    let result = {}
+    await axios
+        .put(`${baseURL}${url}`, data, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        })
+        .then((res) => {
+            result = res
+        })
+        .catch((e) => {
+            result = e.response
+        })
+    return result
+}
+
+export const deleteData = async (url, token) => {
+    let result = {}
+    await axios
+        .delete(`${baseURL}${url}`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        })
+        .then((res) => {
+            result = res
+        })
+        .catch((e) => {
+            result = e.response
+        })
+    return result
+}
+
 export const addOperation = async (token, data) => {
     let result = {}
     await axios
@@ -45,11 +79,12 @@ export const addOperation = async (token, data) => {
             },
         })
         .then((res) => {
-            console.log(res)
+            result = res
         })
         .catch((e) => {
-            console.log(e)
+            result = e.response
         })
+    return result
 }
 
 export const getOperationCommands = async (id) => {
