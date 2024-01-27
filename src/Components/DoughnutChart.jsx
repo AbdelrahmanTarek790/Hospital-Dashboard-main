@@ -1,8 +1,10 @@
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 ChartJS.register(ArcElement, Tooltip, Legend);
 import { Doughnut } from "react-chartjs-2";
+import { useTranslation } from "react-i18next";
 
 function DoughnutChart() {
+  const { t } = useTranslation();
   const data = {
     labels: ["تم الصيانة", "في انتظار الصيانة"],
     datasets: [
@@ -20,7 +22,7 @@ function DoughnutChart() {
 
   return (
     <div className="bg-white rounded-lg p-8">
-      <h4 className="text-right mb-3 font-bold">الصيانة الوقائية</h4>
+      <h4 className="text-right mb-3 font-bold">{t("preventive_maintenance")}</h4>
       <Doughnut data={data} options={options} className="mb-3 w-[250px] 2xl:w-auto " />
       <div className="flex flex-col gap-3">
         <div className="flex flex-row-reverse justify-between items-center">

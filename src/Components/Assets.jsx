@@ -1,11 +1,13 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination ,Navigation} from "swiper/modules";
+import { useTranslation } from "react-i18next";
 
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 function Assets() {
+  const { t } = useTranslation();
   const cards = [
     {
       img: "../src/assets/974 1.png",
@@ -26,7 +28,7 @@ function Assets() {
   ];
   return (
     <div className="p-6 bg-white rounded-lg mb-6 mx-2 lg:mx-6">
-      <h2 className="text-right text-[#05004E] font-bold text-2xl mb-6">المنشآت</h2>
+      <h2 className="text-right text-[#05004E] font-bold text-2xl mb-6">{t("institutions")}</h2>
       <Swiper slidesPerView={1} loop={true} pagination={true} navigation={true} modules={[Pagination,Navigation]} className="max-w-lg lg:max-w-xl xl:max-w-4xl 2xl:max-w-5xl 4xl:max-w-screen-2xl">
         {cards.map((card, index) => {
           return (

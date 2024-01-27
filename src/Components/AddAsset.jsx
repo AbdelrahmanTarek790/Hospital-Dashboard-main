@@ -6,8 +6,10 @@ import { postData } from "../Services/APICalls";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useStoreContext } from "../Context/storeContext";
+import { useTranslation } from "react-i18next";
 
 function AddOperation() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [id, setID] = useState("");
   const [location, setLocation] = useState("");
@@ -61,27 +63,27 @@ function AddOperation() {
             <input onChange={(e) => setID(e.target.value)} className="focus:outline-none border w-full border-black p-3 rounded-lg text-right" type="text" />
           </div>
           <div className="basis-1/2">
-            <p className="text-right text-lg font-semibold mb-4">المكان في المستشفى</p>
+            <p className="text-right text-lg font-semibold mb-4">{t("location")}</p>
             <input onChange={(e) => setLocation(e.target.value)} className="focus:outline-none border w-full border-black p-3 rounded-lg text-right" type="text" />
           </div>
         </div>
         <div className="flex flex-col md:items-center gap-6 md:flex-row-reverse mb-6">
           <div className="basis-1/2">
-            <p className="text-right text-lg font-semibold mb-4">نوع الجهاز</p>
+            <p className="text-right text-lg font-semibold mb-4">{t("type")}</p>
             <input onChange={(e) => setType(e.target.value)} className="focus:outline-none border w-full border-black p-3 rounded-lg text-right" type="text" />
           </div>
           <div className="basis-1/2">
-            <p className="text-right text-lg font-semibold mb-4">معلومات اضافية</p>
+            <p className="text-right text-lg font-semibold mb-4">{t("notes")}</p>
             <input onChange={(e) => setAdditionalInfo(e.target.value)} className="focus:outline-none border w-full border-black p-3 rounded-lg text-right" type="text" />
           </div>
         </div>
         <div className="flex flex-col-reverse md:items-start gap-6 md:flex-row-reverse mb-6">
           <div className="basis-1/2">
-            <p className="text-right text-lg font-semibold mb-4">الوصف</p>
+            <p className="text-right text-lg font-semibold mb-4">{t("description")}</p>
             <textarea onChange={(e) => setDescription(e.target.value)} className="focus:outline-none border w-[98%] h-full block ml-auto border-black p-3 rounded-lg text-right" name="" id=""></textarea>
           </div>
           <div className="basis-1/2">
-            <p className="text-right text-lg font-semibold mb-4">صورة ان وجدت</p>
+            <p className="text-right text-lg font-semibold mb-4">{t("image")}</p>
             <input onChange={(e) => setImage(e.target.value)} className="cursor-pointer focus:outline-none border w-[98%] ml-auto block  border-black p-3 rounded-lg text-right" type="file" />
           </div>
         </div>

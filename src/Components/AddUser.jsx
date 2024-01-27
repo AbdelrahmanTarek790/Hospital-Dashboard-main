@@ -7,7 +7,10 @@ import Select from "react-select";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+import { useTranslation } from "react-i18next";
+
 function AddUser() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const regEmail = /^\w+([\\.-]?\w+)*@\w+([\\.-]?\w+)*(\.\w{2,3})+$/;
   const [name, setName] = useState("");
@@ -42,10 +45,10 @@ function AddUser() {
   };
 
   const options2 = [
-    { value: "admin", label: "ادمن" },
-    { value: "manager", label: "مدير" },
-    { value: "engeineer", label: "مهندس" },
-    { value: "user", label: "مستخدم" },
+    { value: "admin", label: "Admin" },
+    { value: "manager", label: "Manager" },
+    { value: "engeineer", label: "Engeineer" },
+    { value: "user", label: "User" },
   ];
 
   const handleChange2 = (selectedOptions) => {
@@ -123,44 +126,44 @@ function AddUser() {
       <div className="bg-white m-6 p-6 rounded-lg">
         <div className="flex flex-row-reverse gap-2 items-center mb-6 pb-6 border-b-2">
           <i className="fa-solid fa-box text-2xl text-[#05004E]"></i>
-          <h2 className="text-right text-[#05004E] font-bold text-2xl ">اضافة مستخدم</h2>
+          <h2 className="text-right text-[#05004E] font-bold text-2xl ">{t("add_user")}</h2>
         </div>
         <div className="flex flex-col md:items-center gap-6 md:flex-row-reverse mb-6">
           <div className="basis-1/2">
-            <p className="text-right text-lg font-semibold mb-4">الاسم</p>
+            <p className="text-right text-lg font-semibold mb-4">{t("name")}</p>
             <input onChange={(e) => setName(e.target.value)} className="focus:outline-none border w-full border-black p-3 rounded-lg text-right" type="text" />
           </div>
           <div className="basis-1/2">
-            <p className="text-right text-lg font-semibold mb-4">البريد الاكتروني</p>
+            <p className="text-right text-lg font-semibold mb-4">{t("email")}</p>
             <input onChange={(e) => setEmail(e.target.value)} className="focus:outline-none border w-full border-black p-3 rounded-lg text-right" type="text" />
           </div>
         </div>
         <div className="flex flex-col md:items-center gap-6 md:flex-row-reverse mb-6">
           <div className="basis-1/2">
-            <p className="text-right text-lg font-semibold mb-4">كلمة المرور</p>
+            <p className="text-right text-lg font-semibold mb-4">{t("password")}</p>
             <input onChange={(e) => setPass(e.target.value)} className="focus:outline-none border w-full border-black p-3 rounded-lg text-right" type="password" />
           </div>
           <div className="basis-1/2">
-            <p className="text-right text-lg font-semibold mb-4">تأكيد كلمة المرور</p>
+            <p className="text-right text-lg font-semibold mb-4">{t("confirm_password")}</p>
             <input onChange={(e) => setConfirmPass(e.target.value)} className="focus:outline-none border w-full border-black p-3 rounded-lg text-right" type="password" />
           </div>
         </div>
         <div className="flex flex-col md:items-center gap-6 md:flex-row-reverse mb-6">
           <div className="basis-1/2">
-            <p className="text-right text-lg font-semibold mb-4">المؤسسات</p>
+            <p className="text-right text-lg font-semibold mb-4">{t("institutions")}</p>
             <Select styles={customStyles} options={options} onChange={handleChange} isMulti placeholder="Select multiple options" />
           </div>
           <div className="basis-1/2">
-            <p className="text-right text-lg font-semibold mb-4">الصلاحية</p>
+            <p className="text-right text-lg font-semibold mb-4">{t("permissions")}</p>
             <Select styles={customStyles} options={options2} onChange={handleChange2} placeholder="" />
           </div>
         </div>
         <div className="flex flex-row-reverse gap-6 mb-6">
           <button onClick={sendData} disabled={loading} className={loading ? "border-[2px] text-[#cbcfd7] border-[#f0f1f4] py-2 px-12 group rounded-lg" : "border-[2px] text-white hover:text-white bg-[#2B80FF] hover:bg-[#1C48C2]  duration-300 border-[#2B80FF] hover:border-[#1C48C2] py-2 px-12 group rounded-lg"}>
-            اضافة
+            {t("add")}
           </button>
           <Link to={loading ? "#" : "/users"} onClick={(e) => loading && e.preventDefault()} disabled={loading} className={loading ? "border-[2px]  text-[#cbcfd7] border-[#f0f1f4] py-2 px-12 group rounded-lg" : "border-[2px] text-[#FF5656] hover:text-white hover:bg-[#FF5656] duration-300 border-[#FF5656] py-2 px-12 group rounded-lg"}>
-            الغاء
+            {t("cancel")}
           </Link>
         </div>
       </div>

@@ -2,7 +2,6 @@
   transition: background-image 0.3s ease-in-out;
 }
 
-
 .half-circle {
   background: linear-gradient(#fff, #fff) padding-box,
   linear-gradient(94deg, rgba(255, 17, 52, 1) 0%, rgba(247, 210, 60, 1) 51%, rgba(46, 227, 158, 1) 100%) border-box;
@@ -36,4 +35,13 @@
 
 .ant-space-item .ant-button.ant-button-primary{
   color: black !important;
+}
+
+.opacity-pulse {
+  animation: opacityPulse 2s infinite;
+}
+
+@keyframes opacityPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
 }

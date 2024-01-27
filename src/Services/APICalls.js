@@ -99,3 +99,17 @@ export const getOperationCommands = async (id) => {
         })
     return results
 }
+
+export const getFile = async (url) => {
+    let result = await axios.get(`https://erpsystem.pildextech.cf/api/v1${url}`, {
+        responseType: "blob",
+    })
+    // .then((res) => {
+    //     console.log(res);
+    //     result = res
+    // })
+    // .catch((e) => {
+    //     result = e.response
+    // })
+    return result
+}

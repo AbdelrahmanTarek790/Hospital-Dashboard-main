@@ -1,5 +1,4 @@
-import { useState, useContext } from "react"
-import DispatchContext from "../DispatchContext"
+import { useState } from "react"
 import { postData } from "../Services/APICalls"
 import Logo from "../assets/Logo.png"
 
@@ -35,8 +34,8 @@ function Login() {
         }
         if (result.status == 200) {
             localStorage.setItem("userToken", result.data.token)
-            toast.success("تم تسجيل الدخول بنجاح")
-            location.reload()
+            toast.success("تم تسجيل الدخول بنجاح");
+            location.reload();
         }
     }
 

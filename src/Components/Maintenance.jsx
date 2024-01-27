@@ -1,6 +1,8 @@
 import Header from "./Header";
+import { useTranslation } from "react-i18next";
 
 function Maintenance() {
+  const { t } = useTranslation();
   return (
     <div className="grow bg-[#F8F9FA]">
       <Header />
