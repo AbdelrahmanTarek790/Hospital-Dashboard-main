@@ -1,9 +1,24 @@
-import { useEffect } from "react"
+import { useEffect}  from "react"
+import React from "react"
 import Header from "./Header"
 import { Pagination, Table } from "antd"
 import { getData } from "../Services/APICalls"
 import { useState } from "react"
 import { useStoreContext } from "../Context/storeContext"
+import { Button, Typography, styled } from "@mui/material"
+import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
+
+export const HtmlTooltip = styled(({ className, ...props }) => (
+    <Tooltip {...props} classes={{ popper: className }} />
+  ))(({ theme }) => ({
+    [`& .${tooltipClasses.tooltip}`]: {
+      backgroundColor: '#f5f5f9',
+      color: 'rgba(0, 0, 0, 0.87)',
+      maxWidth: 220,
+      fontSize: theme.typography.pxToRem(12),
+      border: '1px solid #dadde9',
+    },
+  }));
 
 const columns = [
     {
@@ -20,7 +35,22 @@ const columns = [
             </div>
         ),
     },
-    { title: "الوصف", dataIndex: "description", key: "description" },
+    {
+        title: "الوصف",
+        dataIndex: "description",
+        key: "description",
+        render: (description) => (
+            <HtmlTooltip
+                title={
+                    <React.Fragment>
+                        <p className="text-base font-semibold">{description}</p>
+                    </React.Fragment>
+                }
+            >
+                <i className="fa-solid fa-circle-info text-[#3268FF] text-xl"></i>
+            </HtmlTooltip>
+        ),
+    },
     { title: "تاريخ الانتهاء", dataIndex: "endDate", key: "endDate" },
     { title: "تاريخ البدأ", dataIndex: "startDate", key: "startDate" },
     { title: "الحالة", dataIndex: "state", key: "state" },
@@ -47,15 +77,20 @@ function OperationCommandsPage() {
     const [pageSize, setPageSize] = useState(2)
     const [limit, setLimit] = useState(10)
 
-
     useEffect(() => {
         const fetchData = async () => {
-            let temp = await getData(`/orders/institution/${userData.currentInstitutions._id}?page=${page}&limit=${limit}`, localStorage.getItem("userToken"))
+            let temp = await getData(
+                `/orders/institution/${userData.currentInstitutions._id}?page=${page}&limit=${limit}`,
+                localStorage.getItem("userToken")
+            )
             setPageSize(temp.data.data.pages * 10)
             let temp2 = temp.data.data.orders.map((item) => {
                 const date = new Date(item.startedAt)
                 if (item.finishedAt == null) {
-                    item.finishedAt = "Null"
+                    item.finishedAt = "لا يوجد"
+                } else {
+                    const date2 = new Date(item.finishedAt)
+                    item.finishedAt = `${date2.getDate()}-${date2.getMonth() + 1}-${date2.getFullYear()}`
                 }
                 const month = date.getMonth() + 1
                 const day = date.getDate()
@@ -73,7 +108,7 @@ function OperationCommandsPage() {
             setList(temp2)
         }
         fetchData()
-    }, [page,limit])
+    }, [page, limit])
 
     return (
         <div className="grow bg-[#F8F9FA]">
@@ -86,7 +121,13 @@ function OperationCommandsPage() {
                 <h2 className="text-right text-[#05004E] font-bold text-2xl mb-12">اوامر التشغيل</h2>
                 <Table columns={columns} dataSource={list} pagination={false}></Table>
                 <div className="flex justify-center mt-12">
-                    <Pagination defaultCurrent={1} showSizeChanger onShowSizeChange={(e, value) => setLimit(value)} total={pageSize} onChange={(e) => setPage(e)} />
+                    <Pagination
+                        defaultCurrent={1}
+                        showSizeChanger
+                        onShowSizeChange={(e, value) => setLimit(value)}
+                        total={pageSize}
+                        onChange={(e) => setPage(e)}
+                    />
                 </div>
             </div>
         </div>
