@@ -16,7 +16,7 @@ function AddOperation() {
   const [additionalInfo, setAdditionalInfo] = useState("");
   const [image, setImage] = useState("");
   const token = localStorage.getItem("userToken");
-  const {userData} =useStoreContext()
+  const { userData } = useStoreContext();
   const [loading, setLoading] = useState(false);
 
   const sendData = async () => {
@@ -45,7 +45,7 @@ function AddOperation() {
     } else {
       toast.error("حدث خطأ ما");
     }
-  }
+  };
 
   return (
     <div className="grow bg-[#F8F9FA]">

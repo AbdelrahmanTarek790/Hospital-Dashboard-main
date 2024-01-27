@@ -45,16 +45,13 @@ function Header() {
                     </ul>
                 </div>
             </button>
-            <div className="flex gap-3 items-center">
+            <div className="flex gap-3 items-center flex-row-reverse">
                 <div className="p-3  size-[35px] bg-[#f0f0f1] flex justify-center items-center rounded-lg">
                     <i className="fa-solid fa-user text-[#3268FF]"></i>
                 </div>
-                <div>
+                <div className="flex flex-col items-end">
                     <p className="font-bold text-sm text-nowrap capitalize">{userData.name}</p>
                     <p className="text-sm capitalize">{userData.role}</p>
-                </div>
-                <div className="p-3 size-[30px] bg-[#f0f0f1] flex justify-center items-center rounded-lg">
-                    <i className="fa-regular fa-bell text-[#3268FF]"></i>
                 </div>
                 <MobileSideMenu />
             </div>

@@ -21,7 +21,7 @@ function DoughnutChart() {
   return (
     <div className="bg-white rounded-lg p-8">
       <h4 className="text-right mb-3 font-bold">الصيانة الوقائية</h4>
-      <Doughnut data={data} options={options} className="mb-3" />
+      <Doughnut data={data} options={options} className="mb-3 w-[250px] 2xl:w-auto " />
       <div className="flex flex-col gap-3">
         <div className="flex flex-row-reverse justify-between items-center">
           <div className="flex flex-row-reverse items-center gap-1">

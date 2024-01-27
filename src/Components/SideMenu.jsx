@@ -6,8 +6,10 @@ import ExpandLess from "@mui/icons-material/ExpandLess"
 import ExpandMore from "@mui/icons-material/ExpandMore"
 import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
+import { useTranslation } from "react-i18next"
 
 function SideMenu() {
+    const { t } = useTranslation()
     const [selected, setSelected] = useState("main")
     const navigate = useNavigate()
     const [open, setOpen0] = useState()
@@ -20,9 +22,9 @@ function SideMenu() {
     }
 
     return (
-        <div className="hidden  h-screen w-fit sticky right-0 top-0 shadow-lg p-2 lg:p-6 lg:flex flex-col justify-between items-center">
+        <div className="hidden  h-screen w-fit sticky right-0 top-0 shadow-lg lg:max-w-[217px] p-2 lg:p-6 lg:flex flex-col justify-between items-center">
             <div>
-                <h2 className="text-[#151D48] text-right font-bold lg:text-4xl mb-6">Dashboard</h2>
+                <h2 className="text-[#151D48] text-right font-bold lg:text-4xl mb-6">{t("dashboard")}</h2>
                 <ul className="flex flex-col space-y-2">
                     <Link
                         onClick={() => {
@@ -37,7 +39,7 @@ function SideMenu() {
                             }`}
                         >
                             <i className="fa-solid fa-chart-pie"></i>
-                            <p className="text-right hidden lg:block">الصفحة الرئيسية</p>
+                            <p className="text-right hidden lg:block">{t("home")}</p>
                         </li>
                     </Link>
                     <Link
@@ -54,7 +56,7 @@ function SideMenu() {
                         >
                             <div className="flex flex-row-reverse items-center gap-2">
                                 <i className="fa-solid fa-hammer"></i>
-                                <p className="text-right hidden lg:block">اوامر التشغيل</p>
+                                <p className="text-right hidden lg:block">{t("operations")}</p>
                             </div>
                             {open == 1 ? <ExpandLess /> : <ExpandMore />}
                         </li>
@@ -64,19 +66,19 @@ function SideMenu() {
                             <Link to="/operations">
                                 <li className="flex flex-row-reverse items-center p-3 gap-2 text-[#737791] cursor-pointer hover:text-[#000000] duration-300">
                                     <i className="fa-solid fa-plus"></i>
-                                    <p className="text-xs lg:text-base">اوامر التشغيل</p>
+                                    <p className="text-xs lg:text-base">{t("operations")}</p>
                                 </li>
                             </Link>
                             <Link to="/add-operation">
                                 <li className="flex flex-row-reverse items-center p-3 gap-2 text-[#737791] cursor-pointer hover:text-[#000000] duration-300">
                                     <i className="fa-solid fa-plus"></i>
-                                    <p className="text-xs lg:text-base">اضافة امر تشغيل</p>
+                                    <p className="text-xs lg:text-base">{t("add_operation")}</p>
                                 </li>
                             </Link>
 
                             <li className="flex flex-row-reverse items-center p-3 gap-2 text-[#737791] cursor-pointer hover:text-[#000000] duration-300">
                                 <i className="fa-solid fa-plus"></i>
-                                <p className="text-xs lg:text-base">سجلات اوامر التشغيل</p>
+                                <p className="text-xs lg:text-base">{t("history_operation")}</p>
                             </li>
                         </ul>
                     </Collapse>
@@ -94,7 +96,7 @@ function SideMenu() {
                         >
                             <div className="flex flex-row-reverse items-center gap-2">
                                 <i className="fa-solid fa-boxes-stacked"></i>
-                                <p className="text-right hidden lg:block">الاصول</p>
+                                <p className="text-right hidden lg:block">{t("devices")}</p>
                             </div>
                             {open == 2 ? <ExpandLess /> : <ExpandMore />}
                         </li>
@@ -104,13 +106,13 @@ function SideMenu() {
                             <Link to="/assets">
                                 <li className="flex flex-row-reverse items-center p-3 gap-2 text-[#737791] cursor-pointer hover:text-[#000000] duration-300">
                                     <i className="fa-solid fa-plus"></i>
-                                    <p className="text-xs lg:text-base">جميع الاصول</p>
+                                    <p className="text-xs lg:text-base">{t("all_devices")}</p>
                                 </li>
                             </Link>
                             <Link to="/add-asset">
                                 <li className="flex flex-row-reverse items-center p-3 gap-2 text-[#737791] cursor-pointer hover:text-[#000000] duration-300">
                                     <i className="fa-solid fa-plus"></i>
-                                    <p className="text-xs lg:text-base">اضافة اصل</p>
+                                    <p className="text-xs lg:text-base">{t("add_device")}</p>
                                 </li>
                             </Link>
                         </ul>
@@ -244,7 +246,7 @@ function SideMenu() {
                 onClick={logout}
                 className="flex items-center space-x-2 border-[2px] hover:bg-[#FF5656] duration-300 border-[#FF5656] p-3 group rounded-lg"
             >
-                <p className="text-[#737791] group-hover:text-white duration-300 hidden lg:block">تسجيل الخروج</p>
+                <p className="text-[#737791] group-hover:text-white duration-300 hidden lg:block">{t("logout")}</p>
                 <i className="fa-solid fa-right-from-bracket text-[#FF5656] group-hover:text-white duration-300"></i>
             </button>
         </div>

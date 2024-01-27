@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import Header from "./Header"
-import { Table } from "antd"
+import { Pagination, Table } from "antd"
 import { getData } from "../Services/APICalls"
 import { useState } from "react"
 import { useStoreContext } from "../Context/storeContext"
@@ -31,7 +31,9 @@ const columns = [
         key: "devices",
         render: (e) => (
             <div className="w-[100px]">
-              {e.split(" - ").map((item ,key) => (<div key={key}>{item}</div>))}
+                {e.split(" - ").map((item, key) => (
+                    <div key={key}>{item}</div>
+                ))}
             </div>
         ),
     },
@@ -40,12 +42,16 @@ const columns = [
 
 function OperationCommandsPage() {
     const [list, setList] = useState()
-    const {userData} =useStoreContext()
+    const { userData } = useStoreContext()
+    const [page, setPage] = useState(1)
+    const [pageSize, setPageSize] = useState(2)
+    const [limit, setLimit] = useState(10)
+
 
     useEffect(() => {
-        let instituteID = localStorage.getItem("instituteID")
         const fetchData = async () => {
-            let temp = await getData(`/orders/institution/${userData.currentInstitutions._id}`, localStorage.getItem("userToken"))
+            let temp = await getData(`/orders/institution/${userData.currentInstitutions._id}?page=${page}&limit=${limit}`, localStorage.getItem("userToken"))
+            setPageSize(temp.data.data.pages * 10)
             let temp2 = temp.data.data.orders.map((item) => {
                 const date = new Date(item.startedAt)
                 if (item.finishedAt == null) {
@@ -67,7 +73,7 @@ function OperationCommandsPage() {
             setList(temp2)
         }
         fetchData()
-    }, [])
+    }, [page,limit])
 
     return (
         <div className="grow bg-[#F8F9FA]">
@@ -79,6 +85,9 @@ function OperationCommandsPage() {
                 </div>
                 <h2 className="text-right text-[#05004E] font-bold text-2xl mb-12">اوامر التشغيل</h2>
                 <Table columns={columns} dataSource={list} pagination={false}></Table>
+                <div className="flex justify-center mt-12">
+                    <Pagination defaultCurrent={1} showSizeChanger onShowSizeChange={(e, value) => setLimit(value)} total={pageSize} onChange={(e) => setPage(e)} />
+                </div>
             </div>
         </div>
     )

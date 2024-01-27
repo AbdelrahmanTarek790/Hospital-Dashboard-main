@@ -2,6 +2,7 @@ import Header from "./Header";
 import Assets from "./Assets";
 import Charts from "./Charts";
 import OperationCommands from "./OperationCommands";
+import GoogleChart from "./GoogleChart";
 
 function MainPage() {
   return (
@@ -10,6 +11,7 @@ function MainPage() {
       <Assets />
       <Charts />
       <OperationCommands />
+      {/* <GoogleChart></GoogleChart> */}
     </div>
   );
 }
