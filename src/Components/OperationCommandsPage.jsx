@@ -60,7 +60,7 @@ const columns = [
         dataIndex: "devices",
         key: "devices",
         render: (e) => (
-            <div className="w-[100px]">
+            <div className="w-[125px]">
                 {e.split(" - ").map((item, key) => (
                     <div key={key}>{item}</div>
                 ))}
