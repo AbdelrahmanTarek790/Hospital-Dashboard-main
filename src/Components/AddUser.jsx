@@ -40,14 +40,12 @@ function AddUser() {
   const handleChange = (selectedOptions) => {
     let values = [];
     values = selectedOptions.map((option) => option.value);
-    console.log(values);
     setInstitutions(values);
   };
 
   const options2 = [
-    { value: "admin", label: "Admin" },
     { value: "manager", label: "Manager" },
-    { value: "engineer", label: "Engineer" },
+    { value: "engeineer", label: "Engeineer" },
     { value: "user", label: "User" },
   ];
 
