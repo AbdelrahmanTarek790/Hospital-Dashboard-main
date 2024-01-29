@@ -47,7 +47,7 @@ function AddUser() {
   const options2 = [
     { value: "admin", label: "Admin" },
     { value: "manager", label: "Manager" },
-    { value: "engeineer", label: "Engeineer" },
+    { value: "engineer", label: "Engineer" },
     { value: "user", label: "User" },
   ];
 
