@@ -21,7 +21,7 @@ function SideMenu() {
   };
 
   return (
-    <div className="hidden  h-screen w-fit sticky right-0 top-0 shadow-lg lg:max-w-[217px] p-2 lg:p-6 lg:flex flex-col justify-between items-center">
+    <div className="hidden  h-screen w-fit sticky right-0 top-0 shadow-lg lg:max-w-[240px] p-2 lg:p-6 lg:flex flex-col justify-between items-center">
       <div className=" lg:w-[167px]">
         <h2 className="text-[#151D48] text-right font-bold lg:text-4xl mb-6">{t("dashboard")}</h2>
         <ul className="flex flex-col space-y-2">
@@ -114,7 +114,7 @@ function SideMenu() {
             <li className={`flex p-3 cursor-pointer rounded-lg flex-row-reverse justify-between items-center gap-2 text-[#737791] hover:bg-gradient-to-l from-[#4D7DFF] to-[#1C48C2] hover:text-white duration-300 ${selected == "maintenance" ? "bg-gradient-to-l from-[#4D7DFF] to-[#1C48C2] text-white" : ""}`}>
               <div className="flex flex-row-reverse items-center gap-2">
                 <i className="fa-solid fa-toolbox"></i>
-                <p className="text-right hidden text-nowrap lg:block">{t("preventive_maintenance")}</p>
+                <p className="text-right hidden lg:block">{t("preventive_maintenance")}</p>
               </div>
               {/* {open == 3 ? <ExpandLess /> : <ExpandMore />} */}
             </li>

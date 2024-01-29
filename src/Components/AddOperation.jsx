@@ -47,7 +47,7 @@ function AddOperation() {
   const [devicesOptions, setDevicesOptions] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const {userData} =useStoreContext()
+  const { userData } = useStoreContext();
 
   useEffect(() => {
     const fetchData = async () => {

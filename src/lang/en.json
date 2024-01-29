@@ -79,6 +79,12 @@
     "operation_place": "Operation Place",
     "choose_institution": "Choose Institution",
     "no_institution": "No Institution Available",
-    "choose": "Choose"
+    "choose": "Choose",
+    "first_week": "First Week",
+    "second_week": "Second Week",
+    "third_week": "Third Week",
+    "fourth_week": "Fourth Week",
+    "device": "Device",
+    "code": "Code"
 
 }

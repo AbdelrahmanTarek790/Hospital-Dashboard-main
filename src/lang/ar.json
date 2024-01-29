@@ -80,5 +80,11 @@
     "operation_place": "مكان العملية",
     "choose_institution": "اختر مؤسسة",
     "no_institution": "لا توجد مؤسسات",
-    "choose": "اختر"
+    "choose": "اختر",
+    "first_week": "الأسبوع الأول",
+    "second_week": "الأسبوع الثاني",
+    "third_week": "الأسبوع الثالث",
+    "fourth_week": "الأسبوع الرابع",
+    "device": "الاصل",
+    "code": "الكود"
 }

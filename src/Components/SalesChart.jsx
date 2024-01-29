@@ -77,7 +77,6 @@ function SalesChart() {
           },
         ],
       });
-      // setSelectList(temp.data.data);
     };
     fetchData();
   }, [date]);

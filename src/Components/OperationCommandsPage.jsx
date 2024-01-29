@@ -140,7 +140,7 @@ function OperationCommandsPage() {
                 </div>
                 <Table dataSource={list} pagination={false}>
                     <Table.Column
-                        title={t("edit_or_delete_or_maintenance")}
+                        title={t("edit_or_delete")}
                         dataIndex="action"
                         key="action"
                         render={() => (
