@@ -57,10 +57,10 @@ function Maintenance() {
                     if (item.weekNumber === 3) weekThree = item.checked
                     if (item.weekNumber === 4) weekFour = item.checked
                 })
-                if (weekOne === undefined) weekOne = false
-                if (weekTwo === undefined) weekTwo = false
-                if (weekThree === undefined) weekThree = false
-                if (weekFour === undefined) weekFour = false
+                if (weekOne === undefined) weekOne = null
+                if (weekTwo === undefined) weekTwo = null
+                if (weekThree === undefined) weekThree = null
+                if (weekFour === undefined) weekFour = null
                 return {
                     institutions: item.institutions,
                     location: item.location,
@@ -118,8 +118,10 @@ function Maintenance() {
                             <div className="flex justify-center gap-2">
                                 {e ? (
                                     <i className="fa-solid fa-check text-[#2ebb2e] text-base"></i>
-                                ) : (
+                                ) : e === false ? (
                                     <i className="fa-solid fa-xmark text-[#c42f2f] text-base"></i>
+                                ) : (
+                                    <i className="fa-solid fa-minus text-[#05004E] text-base"></i>
                                 )}
                             </div>
                         )}
@@ -132,30 +134,46 @@ function Maintenance() {
                             <div className="flex justify-center gap-2">
                                 {e ? (
                                     <i className="fa-solid fa-check text-[#2ebb2e] text-base"></i>
-                                ) : (
+                                ) : e === false ? (
                                     <i className="fa-solid fa-xmark text-[#c42f2f] text-base"></i>
+                                ) : (
+                                    <i className="fa-solid fa-minus text-[#05004E] text-base"></i>
                                 )}
                             </div>
                         )}
                     />
-                    <Table.Column title={t("second_week")} dataIndex="weekTwo" key="weekTwo" render={(e) => (
+                    <Table.Column
+                        title={t("second_week")}
+                        dataIndex="weekTwo"
+                        key="weekTwo"
+                        render={(e) => (
                             <div className="flex justify-center gap-2">
                                 {e ? (
                                     <i className="fa-solid fa-check text-[#2ebb2e] text-base"></i>
-                                ) : (
+                                ) : e === false ? (
                                     <i className="fa-solid fa-xmark text-[#c42f2f] text-base"></i>
+                                ) : (
+                                    <i className="fa-solid fa-minus text-[#05004E] text-base"></i>
                                 )}
                             </div>
-                        )} />
-                    <Table.Column title={t("first_week")} dataIndex="weekOne" key="weekOne" render={(e) => (
+                        )}
+                    />
+                    <Table.Column
+                        title={t("first_week")}
+                        dataIndex="weekOne"
+                        key="weekOne"
+                        render={(e) => (
                             <div className="flex justify-center gap-2">
                                 {e ? (
                                     <i className="fa-solid fa-check text-[#2ebb2e] text-base"></i>
-                                ) : (
+                                ) : e === false ? (
                                     <i className="fa-solid fa-xmark text-[#c42f2f] text-base"></i>
+                                ) : (
+                                    <i className="fa-solid fa-minus text-[#05004E] text-base"></i>
                                 )}
                             </div>
-                        )} />
+                        )}
+                    />
                     <Table.Column title={t("location")} dataIndex="location" key="location" />
                     <Table.Column title={t("device")} dataIndex="modelType" key="modelType" />
                     <Table.Column title={t("code")} dataIndex="IDCode" key="IDCode" />
