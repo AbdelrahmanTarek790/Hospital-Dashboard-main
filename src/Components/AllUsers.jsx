@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Header from "./Header";
 import { Table } from "antd";
-import { getData, updateData } from "../Services/APICalls";
+import { getData, updateData, deleteData } from "../Services/APICalls";
 import { useTranslation } from "react-i18next";
 import Modal from "@mui/material/Modal";
 import Select from "react-select";
@@ -13,7 +13,9 @@ function AllUsers() {
   const [users, setUsers] = useState([]);
   const { t } = useTranslation();
   const [open, setOpen] = useState(false);
+  const [open2, setOpen2] = useState(false);
   const handleClose = () => setOpen(false);
+  const handleClose2 = () => setOpen2(false);
   const [userID, setUserID] = useState("");
   const [name, setName] = useState("");
   const [role, setRole] = useState("");
@@ -27,7 +29,7 @@ function AllUsers() {
   useEffect(() => {
     getData("/users/all-users", localStorage.getItem("userToken")).then((res) => {
       let temp2 = res.data.data.map((item) => {
-        return {id: item._id, name: item.name, email: item.email, role: item.role, institutions: item.institutions.map((item) => item.name).join(" - ") };
+        return { id: item._id, name: item.name, email: item.email, role: item.role, institutions: item.institutions.map((item) => item.name).join(" - ") };
       });
       setUsers(temp2);
     });
@@ -84,25 +86,42 @@ function AllUsers() {
   };
 
   const sendData = async () => {
-
-    if(name === ""){
+    if (name === "") {
       toast.error("ادخل الاسم");
       return;
     }
-    if(!regEmail.test(email)){
+    if (!regEmail.test(email)) {
       toast.error("ادخل البريد الاكتروني بشكل صحيح");
       return;
     }
-    if(institutions.length === 0){
+    if (institutions.length === 0) {
       toast.error("اختر المؤسسة");
       return;
     }
     setLoading(true);
-    let temp = await updateData(`/users//edit-user/${userID}`, { name, role,  institutions, email}, token);
-    if(temp.status === 200){
+    let temp = await updateData(`/users//edit-user/${userID}`, { name, role, institutions, email }, token);
+    if (temp.status === 200) {
       handleClose();
       location.reload();
-    }else{
+    } else {
+      toast.error("حدث خطأ ما");
+      setLoading(false);
+    }
+  };
+
+  const deleteUser = (record) => {
+    console.log(record);
+    setOpen2(true);
+    setUserID(record.id);
+  };
+
+  const handleDelete = async () => {
+    console.log(userID);
+    let temp = await deleteData(`/users/delete-account/${userID}`, token);
+    if (temp.status === 200) {
+      handleClose2();
+      location.reload();
+    } else {
       toast.error("حدث خطأ ما");
       setLoading(false);
     }
@@ -126,7 +145,7 @@ function AllUsers() {
                 <button onClick={() => editUser(record)} className="focus:outline-none">
                   <i className="fa-solid fa-pen bg-[#0EB70B] text-white p-2 rounded-lg "></i>
                 </button>
-                <button className="focus:outline-none">
+                <button onClick={() => deleteUser(record)} className="focus:outline-none">
                   <i className="fa-solid fa-trash bg-[#CC0F1F] text-white p-2 rounded-lg"></i>
                 </button>
               </div>
@@ -163,6 +182,22 @@ function AllUsers() {
               <div className="flex justify-center">
                 <button disabled={loading} onClick={sendData} className={loading ? "border-[2px] text-[#cbcfd7] border-[#f0f1f4] py-2 px-12 group rounded-lg" : "border-[2px] text-white hover:text-white bg-[#2B80FF] hover:bg-[#1C48C2]  duration-300 border-[#2B80FF] hover:border-[#1C48C2] py-2 px-12 group rounded-lg"}>
                   {t("edit_user")}
+                </button>
+              </div>
+            </div>
+          </div>
+        </Modal>
+        <Modal open={open2} onClose={handleClose2}>
+          <div className="w-screen h-screen flex justify-center items-center">
+            <div className="p-4 bg-white rounded min-w-[250px] lg:min-w-[450px]">
+              <div className="flex justify-end mb-2">
+                <i className="fa-solid fa-xmark text-2xl text-[#FF5656] cursor-pointer" onClick={() => handleClose2()}></i>
+              </div>
+              <h3 className="text-center text-2xl mb-3">{t("are_you_sure")}</h3>
+              <div className="flex justify-center">
+                <button onClick={handleDelete} className="flex items-center space-x-2 border-[2px] hover:bg-[#FF5656] duration-300 border-[#FF5656] p-3 group rounded-lg">
+                  <p className="text-[#737791] group-hover:text-white duration-300 hidden lg:block">{t("delete_user")}</p>
+                  <i className="fa-solid fa-trash text-[#FF5656] group-hover:text-white duration-300"></i>
                 </button>
               </div>
             </div>

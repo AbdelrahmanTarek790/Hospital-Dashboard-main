@@ -24,14 +24,15 @@ function AllActivities() {
                 const day = date.getDate()
                 const year = date.getFullYear()
                 return {
-                    name: item.user.name,
-                    role: item.user.role,
+                    name: item.user === null ? "Deleted User" : item.user.name,
+                    role: item.user === null ? "Deleted User" : item.user.role,
                     place: item.category === "Device" ? "اصل" : "امر تشغيل",
                     type: item.status === "Created" ? "اضافه" : item.status === "Deleted" ? "حذف" : "تعديل",
                     time: `${day}-${month}-${year}`,
                 }
             })
-            setData(temp2.reverse())
+
+            setData(temp2)
         }
         fetchData()
     }, [page, limit])

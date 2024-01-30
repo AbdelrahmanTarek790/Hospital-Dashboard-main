@@ -86,6 +86,9 @@
     "fourth_week": "Fourth Week",
     "device": "Device",
     "code": "Code",
-    "edit_user_info": "Edit User Info"
+    "edit_user_info": "Edit User Info",
+    "are_you_sure": "Are You Sure You Want To Delete User?",
+    "are_you_sure2": "Are You Sure You Want To Delete Device?",
+    "edit_device_info": "Edit Device Info"
 
 }
