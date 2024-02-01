@@ -16,7 +16,7 @@ function AllActivities() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await getData(`/history/${userData.currentInstitutions._id}?page=${page}&limit=${limit}`);
+      const res = await getData(`/history/${userData.currentInstitutions._id}?page=${page}&limit=${limit}`,localStorage.getItem("userToken"))
       setPageSize(res.data.pages * 10);
       let temp2 = res.data.histories.map((item) => {
         const date = new Date(item.createdAt);
