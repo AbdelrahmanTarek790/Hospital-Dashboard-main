@@ -27,7 +27,7 @@ function AddUser() {
 
   useEffect(() => {
     const fetchInstitutions = async () => {
-      let temp = await getData("/institutions/all", token);
+      let temp = await getData("/institutions/", token);
       let temp2 = temp.data.data.map((item) => {
         return { value: item._id, label: item.name };
       });
@@ -51,9 +51,7 @@ function AddUser() {
   ];
 
   const handleChange2 = (selectedOptions) => {
-    console.log(selectedOptions);
     setRole(selectedOptions.value);
-    console.log(role);
   };
 
   const customStyles = {
@@ -113,7 +111,6 @@ function AddUser() {
     }
     setLoading(true);
     let temp = await postData("/auth/signup", { name, email, password, passwordConfirm: confirmPass, role, institutions }, token);
-    console.log(temp);
     if (temp.status === 201) {
       toast.success("تم اضافة المستخدم بنجاح");
       navigate("/users");
