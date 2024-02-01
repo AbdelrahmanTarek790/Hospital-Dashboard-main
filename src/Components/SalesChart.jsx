@@ -8,13 +8,13 @@ import dayjs from "dayjs"
 ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend)
 
 function SalesChart() {
-    const [select, setSelect] = useState(false)
+    
     const token = localStorage.getItem("userToken")
     const { userData } = useStoreContext()
     const monthFormat = "YYYY/MM"
     const [date, setDate] = useState(new Date(2024, 1, 0))
     const [monthName, setMonthName] = useState(date.toLocaleString("default", { month: "long" }))
-
+    const [select, setSelect] = useState(false)
     const monthDays = Array.from({ length: date.getDate() }, (_, i) => (i + 1).toString())
 
     const [chartData, setChartData] = useState({
@@ -53,6 +53,7 @@ function SalesChart() {
                 },
                 suggestedMax: 6,
             },
+
         },
     }
     // userData.currentInstitutions._id
@@ -99,7 +100,7 @@ function SalesChart() {
                     </span>
                     <div className={`absolute top-full min-w-full w-max bg-white shadow-md mt-1 rounded-lg z-[2] ${select ? "block" : "hidden"}`}>
                         <DatePicker
-                            defaultValue={dayjs(`${date.getFullYear()}/${(date.getMonth()+1).toString().padStart(2, "0")}`, monthFormat)}
+                            defaultValue={dayjs(`${date.getFullYear()}/${date.getMonth().toString().padStart(2, "0")}`, monthFormat)}
                             format={monthFormat}
                             onChange={(date, dateString) => {
                                 let data = dateString.split("/")
