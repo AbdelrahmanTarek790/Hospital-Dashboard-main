@@ -47,7 +47,7 @@ function AllUsers() {
 
   const editUser = (record) => {
     const fetchInstitutions = async () => {
-      let temp = await getData("/institutions/all", token);
+      let temp = await getData("/institutions/", token);
       let temp2 = temp.data.data.map((item) => {
         return { value: item._id, label: item.name };
       });
