@@ -99,7 +99,7 @@ function SalesChart() {
                     </span>
                     <div className={`absolute top-full min-w-full w-max bg-white shadow-md mt-1 rounded-lg z-[2] ${select ? "block" : "hidden"}`}>
                         <DatePicker
-                            defaultValue={dayjs(`${date.getFullYear()}/${date.getMonth().toString().padStart(2, "0")}`, monthFormat)}
+                            defaultValue={dayjs(`${date.getFullYear()}/${(date.getMonth()+1).toString().padStart(2, "0")}`, monthFormat)}
                             format={monthFormat}
                             onChange={(date, dateString) => {
                                 let data = dateString.split("/")
