@@ -46,7 +46,6 @@ function DoughnutChart() {
             setDone(temp.data.trueData * 1)
             setNotDone(temp.data.falseData * 1)
             setPending(temp.data.data.maintenanceArray.length * 4 - temp.data.trueData - temp.data.falseData)
-
             setTotal(temp.data.data.maintenanceArray.length * 4)
         }
 
