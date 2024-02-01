@@ -73,6 +73,17 @@ function OperationCommandsPage() {
     fetchData();
   }, [page, limit]);
 
+  
+  const onChangeSearch = async (e) => {
+    let temp = await getData(`/devices/institution/${userData.currentInstitutions._id}?page=${page}&limit=${limit}&search=${e}`, localStorage.getItem("userToken"))
+    setPageSize(temp.data.data.pages * 10);
+      let temp2 = temp.data.data.devices.map((item) => {
+        return { IDCode: item.IDCode, place: item.location, type: item.modelType, description: item.description, notes: item.notes, id: item._id };
+      });
+      setList2(temp2);
+  
+  };
+
   const toggleSelect = () => {
     setSelect(!select);
   };
@@ -140,7 +151,6 @@ function OperationCommandsPage() {
       return;
     }
     let temp = await updateData(`/devices/${deviceID}`, { IDCode, location, modelType, description, notes }, token);
-    console.log(temp);
     if (temp.status === 200) {
       window.location.reload();
       handleClose2();
@@ -150,28 +160,32 @@ function OperationCommandsPage() {
   };
 
   const handleDelete = async (e) => {
-    console.log(e);
     setOpen3(true);
     setDeviceID(e.id);
-  }
+  };
 
   const deleteDevice = async () => {
-    console.log(deviceID);
     let temp = await deleteData(`/devices/${deviceID}`, token);
-    console.log(temp);
     if (temp.status === 200) {
       window.location.reload();
       handleClose3();
-    }else{
+    } else {
       toast.error("حدث خطأ ما");
     }
-  }
+  };
 
   return (
     <div className="grow bg-[#F8F9FA]">
       <Header />
       <div className="bg-white lg:m-6 p-6 rounded-lg">
-        <h2 className="text-right text-[#05004E] font-bold text-2xl mb-12">{t("devices")}</h2>
+        <div className="flex items-center justify-between mb-12">
+          <div className="bg-[#f8f9fa] py-4 px-3 min-w-[250px] flex items-center rounded-xl">
+            <i className="fa-solid fa-magnifying-glass"></i>
+            <input onChange={(e) => onChangeSearch(e.target.value)} className="bg-[#f8f9fa] focus:outline-none pl-2" type="text" />
+          </div>
+          <h2 className="text-right text-[#05004E] font-bold text-2xl ">{t("devices")}</h2>
+        </div>
+
         <Table dataSource={list2} pagination={false}>
           <Table.Column
             title={t("edit_or_delete_or_maintenance")}

@@ -20,6 +20,7 @@ import AllUsers from "./Components/AllUsers";
 import AllActivities from "./Components/AllActivities";
 import { useStoreContext } from "./Context/storeContext";
 import Plan from "./Components/Plan";
+import AddInstitute from "./Components/AddInstitute";
 
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
@@ -78,6 +79,7 @@ function App() {
               <Route path="/plan" exact element={<Plan />} />
               <Route path="/users" exact element={<AllUsers />} />
               <Route path="/all-activities" exact element={<AllActivities />} />
+              <Route path="/add-institute" exact element={<AddInstitute />} />
             </>
           )}
         </Routes>

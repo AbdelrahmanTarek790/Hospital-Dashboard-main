@@ -89,6 +89,14 @@
     "edit_user_info": "Edit User Info",
     "are_you_sure": "Are You Sure You Want To Delete User?",
     "are_you_sure2": "Are You Sure You Want To Delete Device?",
-    "edit_device_info": "Edit Device Info"
+    "are_you_sure3": "Are You Sure You Want To Delete Order?",
+    "are_you_sure4": "Are You Sure You Want To Delete Institution?",
+    "edit_device_info": "Edit Device Info",
+    "change_password": "Change Password",
+    "add_inst": "Add Institution",
+    "phone_number": "Phone Number",
+    "address": "Address",
+    "create_institution": "Create Institution",
+    "new_institution": "New Institution"
 
 }

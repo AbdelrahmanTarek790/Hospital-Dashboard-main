@@ -32,9 +32,20 @@ function DoughnutChart({ title }) {
     }
 
     return (
-        <div className=" bg-white rounded-lg p-8">
-            <h4 className="text-right mb-3 font-bold">{title}</h4>
-            <Doughnut data={data} options={options} plugins={textCenter} className="w-[250px] 2xl:w-auto" />
+        <div className=" bg-white rounded-lg p-8 w-[98%] lg:w-[30%]">
+            <div className="flex items-center justify-between ">
+                <button className="flex items-center gap-2 border rounded-lg p-[6px] justify-center hover:bg-[#f0f0f0] transition-all">
+                    <p className="text-right font-bold me-0 ms-0">تعديل</p> <i className="fa-solid fa-pen text-sm cursor-pointer"></i>
+                </button>
+                <h4 className="text-right mb-3 font-bold">{title}</h4>
+            </div>
+
+            <Doughnut
+                data={data}
+                options={options}
+                plugins={textCenter}
+                className="w-[100%] sm:w-[50%] lg:w-[250px] lg:max-w-[300px] lg:max-h-[300px]  mx-auto 2xl:w-auto "
+            />
             <div className="flex flex-row-reverse justify-between">
                 <div className="text-center">
                     <h4 className="font-bold mb-1">المستهدف</h4>

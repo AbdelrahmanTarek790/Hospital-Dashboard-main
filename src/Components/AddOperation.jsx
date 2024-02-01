@@ -74,10 +74,6 @@ function AddOperation() {
       toast.error("ادخل تاريخ البدأ");
       return;
     }
-    if (devices === null) {
-      toast.error("ادخل الاصل");
-      return;
-    }
     if (status === "") {
       toast.error("ادخل حالة الامر");
       return;
@@ -103,71 +99,77 @@ function AddOperation() {
   return (
     <div className="grow bg-[#F8F9FA]">
       <Header />
-      <div className="bg-white m-6 p-6 rounded-lg">
-        <div className="flex flex-row-reverse gap-2 items-center mb-6 pb-6 border-b-2">
-          <i className="fa-solid fa-box text-2xl text-[#05004E]"></i>
-          <h2 className="text-right text-[#05004E] font-bold text-2xl ">{t("add_operation")}</h2>
+      {userData.role === "admin" || userData.role === "manager" || userData.role === "engineer" ? (
+        <div className="bg-white m-6 p-6 rounded-lg">
+          <div className="flex flex-row-reverse gap-2 items-center mb-6 pb-6 border-b-2">
+            <i className="fa-solid fa-box text-2xl text-[#05004E]"></i>
+            <h2 className="text-right text-[#05004E] font-bold text-2xl ">{t("add_operation")}</h2>
+          </div>
+          <div className="flex flex-col gap-6 md:flex-row-reverse mb-6">
+            <div className="basis-1/2">
+              <p className="text-right text-lg font-semibold mb-4">ID (Code)</p>
+              <input onChange={(e) => setIDCode(e.target.value)} className="focus:outline-none border w-full border-black p-3 rounded-lg text-right" type="text" />
+            </div>
+            <div className="basis-1/2">
+              <p className="text-right text-lg font-semibold mb-4">{t("location")}</p>
+              <input onChange={(e) => setLocation(e.target.value)} className="focus:outline-none border w-full border-black p-3 rounded-lg text-right" type="text" />
+            </div>
+          </div>
+          <div className="flex flex-col gap-6 md:flex-row-reverse mb-6">
+            <div className="basis-1/2">
+              <p className="text-right text-lg font-semibold mb-4">{t("start_date")}</p>
+              <input onChange={(e) => setStartedAt(e.target.value)} className="focus:outline-none border w-full border-black p-3 rounded-lg text-right" type="date" />
+            </div>
+            <div className="basis-1/2">
+              <p className="text-right text-lg font-semibold mb-4">{t("end_date")}</p>
+              <input onChange={(e) => setFinishedAt(e.target.value)} className="focus:outline-none border w-full border-black p-3 rounded-lg text-right" type="date" />
+            </div>
+          </div>
+          <div className="flex flex-col gap-6 md:flex-row-reverse mb-6">
+            <div className="basis-1/2">
+              <p className="text-right text-lg font-semibold mb-4">{t("devices")}</p>
+              <Select
+                styles={customStyles}
+                options={devicesOptions}
+                onChange={(e) => {
+                  setDevices(e.map((item) => item._id));
+                }}
+                isMulti
+                placeholder="Select multiple options"
+              />
+            </div>
+            <div className="basis-1/2">
+              <p className="text-right text-lg font-semibold mb-4">{t("status")}</p>
+              <Select
+                styles={customStyles}
+                options={stats}
+                onChange={(e) => {
+                  setStatus(e.value);
+                }}
+                placeholder="Select multiple options"
+              />
+            </div>
+          </div>
+          <div className="flex flex-col gap-6 md:items-center md:flex-row-reverse mb-6">
+            <div className="basis-1/2">
+              <p className="text-right text-lg font-semibold mb-4">{t("description")}</p>
+              <textarea onChange={(e) => setDescription(e.target.value)} className="focus:outline-none border w-[98%] h-full block ml-auto border-black p-3 rounded-lg text-right" name="" id=""></textarea>
+            </div>
+          </div>
+          <div className="flex flex-row-reverse gap-12 mb-6">
+            <button onClick={sendData} disabled={loading} className={loading ? "border-[2px] text-[#cbcfd7] border-[#f0f1f4] py-2 px-12 group rounded-lg" : "border-[2px] text-white hover:text-white bg-[#2B80FF] hover:bg-[#1C48C2]  duration-300 border-[#2B80FF] hover:border-[#1C48C2] py-2 px-12 group rounded-lg"}>
+              {t("add")}
+            </button>
+            <Link to={loading ? "#" : "/operations"} onClick={(e) => loading && e.preventDefault()} disabled={loading} className={loading ? "border-[2px]  text-[#cbcfd7] border-[#f0f1f4] py-2 px-12 group rounded-lg" : "border-[2px] text-[#FF5656] hover:text-white hover:bg-[#FF5656] duration-300 border-[#FF5656] py-2 px-12 group rounded-lg"}>
+              {t("cancel")}
+            </Link>
+          </div>
         </div>
-        <div className="flex flex-col gap-6 md:flex-row-reverse mb-6">
-          <div className="basis-1/2">
-            <p className="text-right text-lg font-semibold mb-4">ID (Code)</p>
-            <input onChange={(e) => setIDCode(e.target.value)} className="focus:outline-none border w-full border-black p-3 rounded-lg text-right" type="text" />
-          </div>
-          <div className="basis-1/2">
-            <p className="text-right text-lg font-semibold mb-4">{t("location")}</p>
-            <input onChange={(e) => setLocation(e.target.value)} className="focus:outline-none border w-full border-black p-3 rounded-lg text-right" type="text" />
-          </div>
+      ) : (
+        <div className="bg-white m-6 p-6 rounded-lg flex justify-center">
+          <p className="text-2xl font-bold">You are not authorized</p>
         </div>
-        <div className="flex flex-col gap-6 md:flex-row-reverse mb-6">
-          <div className="basis-1/2">
-            <p className="text-right text-lg font-semibold mb-4">{t("start_date")}</p>
-            <input onChange={(e) => setStartedAt(e.target.value)} className="focus:outline-none border w-full border-black p-3 rounded-lg text-right" type="date" />
-          </div>
-          <div className="basis-1/2">
-            <p className="text-right text-lg font-semibold mb-4">{t("end_date")}</p>
-            <input onChange={(e) => setFinishedAt(e.target.value)} className="focus:outline-none border w-full border-black p-3 rounded-lg text-right" type="date" />
-          </div>
-        </div>
-        <div className="flex flex-col gap-6 md:flex-row-reverse mb-6">
-          <div className="basis-1/2">
-            <p className="text-right text-lg font-semibold mb-4">{t("devices")}</p>
-            <Select
-              styles={customStyles}
-              options={devicesOptions}
-              onChange={(e) => {
-                setDevices(e.map((item) => item._id));
-              }}
-              isMulti
-              placeholder="Select multiple options"
-            />
-          </div>
-          <div className="basis-1/2">
-            <p className="text-right text-lg font-semibold mb-4">{t("status")}</p>
-            <Select
-              styles={customStyles}
-              options={stats}
-              onChange={(e) => {
-                setStatus(e.value);
-              }}
-              placeholder="Select multiple options"
-            />
-          </div>
-        </div>
-        <div className="flex flex-col gap-6 md:items-center md:flex-row-reverse mb-6">
-          <div className="basis-1/2">
-            <p className="text-right text-lg font-semibold mb-4">{t("description")}</p>
-            <textarea onChange={(e) => setDescription(e.target.value)} className="focus:outline-none border w-[98%] h-full block ml-auto border-black p-3 rounded-lg text-right" name="" id=""></textarea>
-          </div>
-        </div>
-        <div className="flex flex-row-reverse gap-12 mb-6">
-          <button onClick={sendData} disabled={loading} className={loading ? "border-[2px] text-[#cbcfd7] border-[#f0f1f4] py-2 px-12 group rounded-lg" : "border-[2px] text-white hover:text-white bg-[#2B80FF] hover:bg-[#1C48C2]  duration-300 border-[#2B80FF] hover:border-[#1C48C2] py-2 px-12 group rounded-lg"}>
-            {t("add")}
-          </button>
-          <Link to={loading ? "#" : "/operations"} onClick={(e) => loading && e.preventDefault()} disabled={loading} className={loading ? "border-[2px]  text-[#cbcfd7] border-[#f0f1f4] py-2 px-12 group rounded-lg" : "border-[2px] text-[#FF5656] hover:text-white hover:bg-[#FF5656] duration-300 border-[#FF5656] py-2 px-12 group rounded-lg"}>
-            {t("cancel")}
-          </Link>
-        </div>
-      </div>
+      )}
     </div>
   );
 }

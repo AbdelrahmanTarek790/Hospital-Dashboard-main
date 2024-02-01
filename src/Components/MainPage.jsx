@@ -36,7 +36,7 @@ function MainPage() {
             {userData.currentInstitutions ? (
                 <div className="grow bg-[#F8F9FA]">
                     <Header />
-                    <Assets />
+                    {/* <Assets /> */}
                     <Charts />
                     <OperationCommands />
                 </div>

@@ -90,5 +90,13 @@
     "edit_user_info": "تعديل بيانات المستخدم",
     "are_you_sure": "هل أنت متأكد انك تريد حذف المستخدم؟",
     "are_you_sure2": "هل أنت متأكد انك تريد حذف الاصل",
-    "edit_device_info": "تعديل بيانات الاصل"
+    "are_you_sure3": "هل أنت متأكد انك تريد حذف الامر",
+    "are_you_sure4": "هل أنت متأكد انك تريد حذف المؤسسة",
+    "edit_device_info": "تعديل بيانات الاصل",
+    "change_password": "تغيير كلمة المرور",
+    "add_inst": "إضافة مؤسسة",
+    "phone_number": "رقم الهاتف",
+    "address": "العنوان",
+    "create_institution": "إنشاء مؤسسة",
+    "new_institution": "مؤسسة جديدة"
 }

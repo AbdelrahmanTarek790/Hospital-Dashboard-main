@@ -40,46 +40,57 @@ function Maintenance() {
   const toggleSelect = () => {
     setSelect(!select);
   };
+  const setDataTable=(temp)=>{
+    let temp2 = temp.data.data.maintenanceArray.map((item) => {
+      let weekOne;
+      let weekTwo;
+      let weekThree;
+      let weekFour;
+      item.data.map((item) => {
+        if (item.weekNumber === 1) weekOne = item.checked;
+        if (item.weekNumber === 2) weekTwo = item.checked;
+        if (item.weekNumber === 3) weekThree = item.checked;
+        if (item.weekNumber === 4) weekFour = item.checked;
+      });
+      if (weekOne === undefined) weekOne = null;
+      if (weekTwo === undefined) weekTwo = null;
+      if (weekThree === undefined) weekThree = null;
+      if (weekFour === undefined) weekFour = null;
+      return {
+        institutions: item.institutions,
+        location: item.location,
+        modelType: item.modelType,
+        IDCode: item.IDCode,
+        weekOne: weekOne,
+        weekTwo,
+        weekThree,
+        weekFour,
+      };
+    });
+    setList(temp2);    
+  }
   useEffect(() => {
     const fetchData = async () => {
       let temp = await getData(`/maintenance/${userData.currentInstitutions._id}?month=${date.getMonth() + 1}&year=${date.getFullYear()}`, localStorage.getItem("userToken"));
-      let temp2 = temp.data.data.maintenanceArray.map((item) => {
-        let weekOne;
-        let weekTwo;
-        let weekThree;
-        let weekFour;
-        item.data.map((item) => {
-          if (item.weekNumber === 1) weekOne = item.checked;
-          if (item.weekNumber === 2) weekTwo = item.checked;
-          if (item.weekNumber === 3) weekThree = item.checked;
-          if (item.weekNumber === 4) weekFour = item.checked;
-        });
-        if (weekOne === undefined) weekOne = null;
-        if (weekTwo === undefined) weekTwo = null;
-        if (weekThree === undefined) weekThree = null;
-        if (weekFour === undefined) weekFour = null;
-        return {
-          institutions: item.institutions,
-          location: item.location,
-          modelType: item.modelType,
-          IDCode: item.modelType,
-          weekOne: weekOne,
-          weekTwo,
-          weekThree,
-          weekFour,
-        };
-      });
-      setList(temp2);
+      setDataTable(temp)
     };
 
     fetchData();
   }, [date]);
+
+  const onChangeSearch = async (e) => {
+    let temp = await getData(`/maintenance/${userData.currentInstitutions._id}?month=${date.getMonth() + 1}&year=${date.getFullYear()}&search=${e}`, localStorage.getItem("userToken"))
+    setDataTable(temp)
+  
+  };
+
 
   return (
     <div className="grow bg-[#F8F9FA]">
       <Header />
       <div className="bg-white m-2 lg:m-6 p-6 rounded-lg">
         <div className=" flex  justify-between items-start">
+          <div className="flex items-center gap-3">
           <button className="relative flex justify-center items-center bg-white border focus:outline-none shadow text-grey-600 rounded-lg ">
             <p className="px-4 py-3 text-sm" onClick={toggleSelect}>
               {monthName}
@@ -101,6 +112,11 @@ function Maintenance() {
               />
             </div>
           </button>
+          <div className="bg-[#f8f9fa] py-4 px-3 min-w-[250px] flex items-center rounded-xl">
+            <i className="fa-solid fa-magnifying-glass"></i>
+            <input onChange={(e) => onChangeSearch(e.target.value)} className="bg-[#f8f9fa] focus:outline-none pl-2" type="text" />
+          </div>
+          </div>
           <div className="flex flex-row-reverse gap-2 items-center mb-6 pb-6 border-b-2">
             <i className="fa-solid fa-box text-2xl text-[#05004E]"></i>
             <h2 className="text-right text-[#05004E] font-bold text-2xl ">{t("preventive_maintenance")}</h2>
